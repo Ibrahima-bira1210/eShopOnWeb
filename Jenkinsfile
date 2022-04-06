@@ -32,7 +32,7 @@ pipeline {
 
     stage('Deployment') {
       steps {
-        sh 'dotnet publish eShopOnWeb.sln -o /var/aspnet'
+        sh 'dotnet publish eShopOnWeb.sln -o /Users/macbook/Desktop'
       }
     }
 
