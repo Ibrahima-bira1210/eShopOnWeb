@@ -17,7 +17,10 @@ pipeline {
 
         stage('Integration') {
           steps {
-            sh 'dotnet test tests/IntegrationTests'
+            warnError(message: 'Functional test probleme') {
+              sh 'dotnet test tests/IntegrationTests'
+            }
+
           }
         }
 
@@ -33,6 +36,10 @@ pipeline {
     stage('Deployment') {
       steps {
         sh 'dotnet publish eShopOnWeb.sln -o /Users/macbook/Desktop/aspnet'
+        dir(path: '//Users/macbook/Desktop/aspnet') {
+          archiveArtifacts(onlyIfSuccessful: true, artifacts: '*')
+        }
+
       }
     }
 
